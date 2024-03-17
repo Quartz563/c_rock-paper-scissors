@@ -52,29 +52,48 @@ int game(char user, char comp)
     return -1;
 }
 
+int continue_game()
+{
+    char response;
+    printf("Would you like to play again? y/n\n");
+    scanf("%c", &response);
+    if(response == 'y'){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 int main()
 {
-    char comp_select;
-    int rng, result;
-    printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
-    scanf("%c", &selection);
-    srand(time(NULL));
-    rng = rand() % 100;
-    if(rng < 33) {
-        comp_select = 's';
-    } else if(rng > 33 && rng < 66) {
-       comp_select = 'p';
-    } else {
-        comp_select = 'r';
+    while(1){
+        char comp_select;
+        int rng, result;
+        printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
+        scanf("%c", &selection);
+        srand(time(NULL));
+        rng = rand() % 100;
+        if(rng < 33) {
+            comp_select = 's';
+        } else if(rng > 33 && rng < 66) {
+            comp_select = 'p';
+        } else {
+            comp_select = 'r';
+        }
+        result = game(selection, comp_select);
+        if(result == -1){
+            printf("The game was a draw! User: %c, Computer: %c\n", selection, comp_select);
+        } else if(result == 0) {
+            printf("You have lost this game. User: %c, Computer: %c\n", selection, comp_select);
+        } else {
+            printf("You have won this game. User: %c, Computer: %c\n", selection, comp_select);
+        }
+
+        if(continue_game() != 1){
+            break;
+        }
     }
-    result = game(selection, comp_select);
-    if(result == -1){
-        printf("The game was a draw! User: %c, Computer: %c\n", selection, comp_select);
-    } else if(result == 0) {
-        printf("You have lost this game. User: %c, Computer: %c\n", selection, comp_select);
-    } else {
-        printf("You have won this game. User: %c, Computer: %c\n", selection, comp_select);
-    }
+
     return 0;
 }
 

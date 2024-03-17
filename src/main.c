@@ -56,7 +56,29 @@ int game(char user, char comp)
 
 int main()
 {
+    char comp_select;
+    int rng, result;
+    printf("Enter your selection of (r)ock, (p)aper, (s)cissors.");
+    scanf("%c", &selection);
+    srand(time(NULL));
+    rng = rand() % 100;
+    if(rng < 33) {
+        comp_select = 's';
+    } else if(rng > 33 && rng < 66) {
+       comp_select = 'p';
+    } else {
+        comp_select = 'r';
+    }
+    result = game(selection, comp_select);
+    if(result == -1){
+        printf("The game was a draw! User: %c, Computer: %c", selection, comp_select);
+    } else if(result == 0) {
+        printf("You have lost this game. User: %c, Computer: %c", selection, comp_select);
+    } else {
+        printf("You have won this game. User: %c, Computer: %c", selection, comp_select);
+    }
 
+    return 0;
 }
 
 

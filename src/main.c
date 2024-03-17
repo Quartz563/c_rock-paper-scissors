@@ -42,18 +42,6 @@ int game(char user, char comp)
     return -1;
 }
 
-int continue_game()
-{
-    char response;
-    printf("Would you like to play again? y/n\n");
-    scanf(" %c", &response);
-    if(response == 'y'){
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
 int validate_inputs(char input, char options[])
 {
     for(int i = 0; i < sizeof(options)/sizeof(options[0]); i++){
@@ -64,15 +52,36 @@ int validate_inputs(char input, char options[])
     return 0;
 }
 
+int continue_game()
+{
+    char response,  yn_options[] = {'y', 'n'};;
+    printf("Would you like to play again? y/n\n");
+    scanf(" %c", &response);
+    if(validate_inputs(selection, yn_options) != 1){
+        printf("Incorrect option provided. Please re-read the message and select a correct option.");
+        return -1;
+    }
+    if(response == 'y'){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+
 int main()
 {
     while(1){
         char comp_select;
         int rng, result;
+        char rps_options[] = {'r', 'p', 's'};
         printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
         scanf(" %c", &selection);
-
-        //todo validate inputs here
+        if(validate_inputs(selection, rps_options) != 1){
+            printf("Incorrect option provided. Please re-read the message and select a correct option.");
+            continue;
+        }
         srand(time(NULL));
         rng = rand() % 100;
         if(rng < 33) {
@@ -90,11 +99,13 @@ int main()
         } else {
             printf("You have won this game. User: %c, Computer: %c\n", selection, comp_select);
         }
+        if(continue_game() == -1){
+            continue;
+        }
         if(continue_game() != 1){
             break;
         }
     }
-
     return 0;
 }
 

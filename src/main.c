@@ -3,11 +3,9 @@
 //
 
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
 #include <time.h>
 
-int score = 0;
 char selection;
 
 
@@ -58,7 +56,7 @@ int main()
 {
     char comp_select;
     int rng, result;
-    printf("Enter your selection of (r)ock, (p)aper, (s)cissors.");
+    printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
     scanf("%c", &selection);
     srand(time(NULL));
     rng = rand() % 100;
@@ -71,13 +69,12 @@ int main()
     }
     result = game(selection, comp_select);
     if(result == -1){
-        printf("The game was a draw! User: %c, Computer: %c", selection, comp_select);
+        printf("The game was a draw! User: %c, Computer: %c\n", selection, comp_select);
     } else if(result == 0) {
-        printf("You have lost this game. User: %c, Computer: %c", selection, comp_select);
+        printf("You have lost this game. User: %c, Computer: %c\n", selection, comp_select);
     } else {
-        printf("You have won this game. User: %c, Computer: %c", selection, comp_select);
+        printf("You have won this game. User: %c, Computer: %c\n", selection, comp_select);
     }
-
     return 0;
 }
 

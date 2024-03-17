@@ -54,6 +54,16 @@ int continue_game()
     }
 }
 
+int validate_inputs(char input, char options[])
+{
+    for(int i = 0; i < sizeof(options)/sizeof(options[0]); i++){
+        if(options[i] == input){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main()
 {
     while(1){
@@ -61,6 +71,8 @@ int main()
         int rng, result;
         printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
         scanf(" %c", &selection);
+
+        //todo validate inputs here
         srand(time(NULL));
         rng = rand() % 100;
         if(rng < 33) {

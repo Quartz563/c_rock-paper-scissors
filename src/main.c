@@ -11,41 +11,31 @@ char selection;
 
 int game(char user, char comp)
 {
-    if(user == comp)
-    {
+    if(user == comp){
         return -1;
     }
-    if(user == 'r')
-    {
-        if(comp == 'p')
-        {
+    if(user == 'r'){
+        if(comp == 'p'){
             return 0;
         }
-        if( comp == 's')
-        {
+        if( comp == 's'){
             return 1;
         }
 
     }
-    if(user == 'p')
-    {
-        if(comp == 's')
-        {
+    if(user == 'p'){
+        if(comp == 's'){
             return 0;
         }
-        if(comp == 'r')
-        {
+        if(comp == 'r'){
             return 1;
         }
     }
-    if(user == 's')
-    {
-        if(comp == 'r')
-        {
+    if(user == 's'){
+        if(comp == 'r'){
             return 0;
         }
-        if(comp == 'p')
-        {
+        if(comp == 'p'){
             return 1;
         }
     }
@@ -56,7 +46,7 @@ int continue_game()
 {
     char response;
     printf("Would you like to play again? y/n\n");
-    scanf("%c", &response);
+    scanf(" %c", &response);
     if(response == 'y'){
         return 1;
     } else {
@@ -70,7 +60,7 @@ int main()
         char comp_select;
         int rng, result;
         printf("Enter your selection of (r)ock, (p)aper, (s)cissors.\n");
-        scanf("%c", &selection);
+        scanf(" %c", &selection);
         srand(time(NULL));
         rng = rand() % 100;
         if(rng < 33) {
@@ -88,7 +78,6 @@ int main()
         } else {
             printf("You have won this game. User: %c, Computer: %c\n", selection, comp_select);
         }
-
         if(continue_game() != 1){
             break;
         }
